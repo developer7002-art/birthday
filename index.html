@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 🎂</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #12002f, #4b0082, #ff1493);
+      background-size: 400% 400%;
+      animation: backgroundMove 10s ease infinite;
+    }
+
+    /* Main Card */
+    .card {
+      position: relative;
+      width: 90%;
+      max-width: 650px;
+      min-height: 650px;
+      padding: 50px 25px;
+      text-align: center;
+      border-radius: 35px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(15px);
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      z-index: 10;
+      animation: cardAppear 1.5s ease;
+    }
+
+    /* Heading */
+    .small-title {
+      color: #fff;
+      font-size: 18px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      animation: fadeDown 1.5s ease;
+    }
+
+    h1 {
+      margin-top: 15px;
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(50px, 10vw, 85px);
+      line-height: 1.1;
+      color: #fff;
+      text-shadow:
+        0 0 10px #ff69b4,
+        0 0 25px #ff1493,
+        0 0 50px #ff1493;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .name {
+      margin-top: 10px;
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(30px, 6vw, 48px);
+      color: #ffe66d;
+      text-shadow: 0 0 15px #ffcc00;
+      animation: nameBounce 2s infinite;
+    }
+
+    .message {
+      margin: 20px auto;
+      max-width: 500px;
+      color: white;
+      font-size: 17px;
+      line-height: 1.7;
+      animation: fadeUp 2s ease;
+    }
+
+    /* Cake */
+    .cake-container {
+      position: relative;
+      width: 220px;
+      height: 190px;
+      margin: 20px auto 5px;
+      animation: cakeFloat 3s ease-in-out infinite;
+    }
+
+    .cake {
+      position: absolute;
+      bottom: 15px;
+      left: 25px;
+      width: 170px;
+      height: 90px;
+      background: linear-gradient(to bottom, #ff8fab, #ff4d88);
+      border-radius: 12px 12px 20px 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.3);
+    }
+
+    /* Cake icing */
+    .icing {
+      position: absolute;
+      top: -12px;
+      left: 0;
+      width: 170px;
+      height: 35px;
+      background: #fff0f6;
+      border-radius: 20px 20px 10px 10px;
+    }
+
+    .icing::before,
+    .icing::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 25px;
+      background: #fff0f6;
+      border-radius: 50%;
+      top: 15px;
+    }
+
+    .icing::before {
+      left: 30px;
+    }
+
+    .icing::after {
+      right: 35px;
+    }
+
+    /* Cake layers */
+    .layer {
+      position: absolute;
+      left: 10px;
+      width: 150px;
+      height: 8px;
+      background: #ffd166;
+      border-radius: 10px;
+    }
+
+    .layer.one {
+      top: 30px;
+    }
+
+    .layer.two {
+      top: 60px;
+    }
+
+    /* Candle */
+    .candle {
+      position: absolute;
+      width: 15px;
+      height: 65px;
+      left: 103px;
+      top: 15px;
+      background: repeating-linear-gradient(
+        45deg,
+        #fff,
+        #fff 7px,
+        #ff4081 7px,
+        #ff4081 14px
+      );
+      border-radius: 5px;
+    }
+
+    /* Flame */
+    .flame {
+      position: absolute;
+      width: 22px;
+      height: 32px;
+      left: 99px;
+      top: -18px;
+      background: #ffd700;
+      border-radius: 50% 50% 50% 50%;
+      box-shadow:
+        0 0 10px #ffd700,
+        0 0 25px #ff8c00,
+        0 0 45px #ff4500;
+      animation: flame 0.5s ease-in-out infinite alternate;
+    }
+
+    /* Button */
+    .wish-btn {
+      margin-top: 15px;
+      padding: 13px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      background: linear-gradient(45deg, #ff1493, #ff69b4);
+      box-shadow: 0 8px 25px rgba(255, 20, 147, .5);
+      transition: .3s;
+    }
+
+    .wish-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #ff69b4;
+    }
+
+    /* Bubbles */
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.5);
+      box-shadow: inset -5px -5px 10px rgba(255,255,255,.15);
+      animation: bubbleUp linear infinite;
+    }
+
+    .bubble:nth-child(1) {
+      width: 35px;
+      height: 35px;
+      left: 5%;
+      animation-duration: 8s;
+    }
+
+    .bubble:nth-child(2) {
+      width: 20px;
+      height: 20px;
+      left: 18%;
+      animation-duration: 6s;
+      animation-delay: 2s;
+    }
+
+    .bubble:nth-child(3) {
+      width: 55px;
+      height: 55px;
+      left: 35%;
+      animation-duration: 10s;
+      animation-delay: 1s;
+    }
+
+    .bubble:nth-child(4) {
+      width: 25px;
+      height: 25px;
+      left: 60%;
+      animation-duration: 7s;
+      animation-delay: 3s;
+    }
+
+    .bubble:nth-child(5) {
+      width: 45px;
+      height: 45px;
+      left: 78%;
+      animation-duration: 9s;
+      animation-delay: 1s;
+    }
+
+    .bubble:nth-child(6) {
+      width: 18px;
+      height: 18px;
+      left: 90%;
+      animation-duration: 5s;
+      animation-delay: 2s;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      top: -20px;
+      width: 10px;
+      height: 18px;
+      animation: confettiFall linear infinite;
+    }
+
+    .confetti:nth-of-type(1) {
+      left: 10%;
+      background: #ffeb3b;
+      animation-duration: 4s;
+    }
+
+    .confetti:nth-of-type(2) {
+      left: 25%;
+      background: #00e5ff;
+      animation-duration: 5s;
+      animation-delay: 1s;
+    }
+
+    .confetti:nth-of-type(3) {
+      left: 50%;
+      background: #ff4081;
+      animation-duration: 3.5s;
+    }
+
+    .confetti:nth-of-type(4) {
+      left: 75%;
+      background: #76ff03;
+      animation-duration: 4.5s;
+      animation-delay: 1s;
+    }
+
+    .confetti:nth-of-type(5) {
+      left: 90%;
+      background: #ff9800;
+      animation-duration: 5s;
+    }
+
+    /* Animations */
+    @keyframes backgroundMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes cardAppear {
+      from {
+        opacity: 0;
+        transform: scale(.7) rotate(-5deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow:
+          0 0 10px #ff69b4,
+          0 0 20px #ff1493;
+      }
+      to {
+        text-shadow:
+          0 0 20px #fff,
+          0 0 40px #ff69b4,
+          0 0 70px #ff1493;
+      }
+    }
+
+    @keyframes nameBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes cakeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes flame {
+      from {
+        transform: scale(1) rotate(-3deg);
+      }
+      to {
+        transform: scale(1.15) rotate(3deg);
+      }
+    }
+
+    @keyframes bubbleUp {
+      0% {
+        transform: translateY(0) scale(.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) translateX(80px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-30px) rotate(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .card {
+        min-height: 600px;
+        padding: 40px 15px;
+      }
+
+      .message {
+        font-size: 14px;
+      }
+
+      .small-title {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating bubbles -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <!-- Falling confetti -->
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+
+  <div class="card">
+
+    <div class="small-title">A Special Day For You ✨</div>
+
+    <h1>Happy Birthday</h1>
+
+    <div class="name">Dear Friend 💖</div>
+
+    <!-- Birthday Cake -->
+    <div class="cake-container">
+
+      <div class="flame"></div>
+
+      <div class="candle"></div>
+
+      <div class="cake">
+        <div class="icing"></div>
+        <div class="layer one"></div>
+        <div class="layer two"></div>
+      </div>
+
+    </div>
+
+    <p class="message">
+      May your birthday be filled with
+      <strong>love, laughter, happiness</strong> and
+      beautiful memories. 🎉
+      <br>
+      Wishing you a wonderful year ahead! 💕
+    </p>
+
+    <button class="wish-btn" onclick="celebrate()">
+      🎁 Make a Wish!
+    </button>
+
+  </div>
+
+  <script>
+    function celebrate() {
+      alert("🎉 Happy Birthday! May all your wishes come true! 🎂💖");
+    }
+  </script>
+
+</body>
+</html>
